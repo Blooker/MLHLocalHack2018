@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 body {
     background-color: #191414;
@@ -6,29 +7,34 @@ body {
     text-align: center;
 }
 
-#parent {
-  position: absolute;
-  margin: auto;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 250px;
-  height: 100px;
-/*  background-color: #ccc;*/
-/*  border-radius: 3px;*/
+#container {
+    z-index: 1;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 400px;
+    height: 400px;
 }
 
-#parent button {
-    background-color: #1DB954;
+#container button {
+    background-color: #1FC75A;
     border: none;
     color: white;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 25px;
+    font-size: 30px;
     border-radius: 3px;
+    cursor: pointer;
+    font-family: Montserrat;
+}
+
+#container button:hover {
+    background-color: #1CB050;
 }
 
 a {
@@ -36,43 +42,60 @@ a {
     color: #fff;
 }
 
-#parent p {
+#container p {
     color: #ccc;
     font-size: 13px;
-    font-family: Roboto;
-    
+    font-family: Montserrat;
+
+}
+
+#container img {
+    width: 70%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+#logo-container {
+    z-index: 50;
+    position: absolute;
+    margin: auto;
+    top: 80vh;
+    right: 0;
+    left: 0;
+}
+
+.logo {
+    width: 56px;
+    height: auto;
+    margin: 0 20px 0 20px;
+}
+
+.logo:hover{
+    transform: scale(1.5);
 }
 
 footer {
-    height: 20px;
+    height: 30px;
     position: absolute;
     bottom: 20px;
     width: 100vw;
+    text-align: center;
 }
 
 footer p {
-    margin-right: 50px;
-    float: right;
     color: #ccc;
     font-size: 13px;
     font-family: Roboto;
-}
-footer a {
-    margin-bottom: 5px;
+    /*    margin-bottom: 20px;*/
 }
 
-
-
-
-/*
-#login-container {
-    background-color: #1DB954;
-    width: 300px;
-    height: 100px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-
-    margin: 45vh 0 0 -9vw;
+#logo-git {
+    color: #fff;
+    float: right;
+    margin-right: 30px;
+    font-size: 2em;
 }
-*/
+
+#logo-git:hover {
+    color: #A8A8A8;
+}

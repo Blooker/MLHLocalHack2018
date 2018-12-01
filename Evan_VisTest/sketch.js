@@ -30,7 +30,7 @@ function setup() {
     amp = new p5.Amplitude();
     amp.smooth(0.8);
     
-    ambientLight(50);
+    ambientLight(100);
 
     updateVisSize();
     

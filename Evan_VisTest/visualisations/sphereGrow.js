@@ -6,8 +6,11 @@ function SphereGrow () {
     
     this.ripples = [];
     
+    this.sphereColMax = null;
+    
     this.setup = function () {
-        
+        this.setRandomColMax();
+        console.log(this.sphereColMax);
     }
     
     this.draw = function (amp) {        
@@ -19,12 +22,17 @@ function SphereGrow () {
         noStroke();
 
         push();
-        directionalLight(250, 250, 250, -dirX, -dirY, -0.25);
+        directionalLight(155, 155, 155, -dirX, -dirY, -0.25);
         
         scale(currentScale);
         
-        var colorChange = 255-constrain(vol*510, 0, 255);
-        ambientMaterial(255, colorChange, colorChange);
+//        var colorChange = map(255-constrain(vol*510, 0, 255), 0, 255, 0, 150);
+                
+        var red = 255 - constrain(255/this.sphereColMax[0]*vol*100, 0, 255);
+        var green = 255 - constrain(255/this.sphereColMax[1]*vol*100, 0, 255);
+        var blue = 255 - constrain(255/this.sphereColMax[2]*vol*100, 0, 255);
+        
+        ambientMaterial(red, green, blue);
         
         var thisScale = vol*800;
         sphere(thisScale);
@@ -36,6 +44,7 @@ function SphereGrow () {
                 
         if (thisScale - this.lastScale > this.rippleDiff) {
             this.createRipple();
+            this.setRandomColMax();
         }
         
         this.drawRipples();
@@ -66,5 +75,32 @@ function SphereGrow () {
                 break;
             }
         }
+    }
+    
+    this.setRandomColMax = function () {
+        var cols = [];
+        var sum = 0;
+        
+        var extremeValue = random(3);
+        
+        for (var i=0; i<3; i++) {
+            if (i==2) {
+                cols.push(255-sum)
+            } else {
+                var val = 127;
+                if (i == extremeValue) {                
+                    while (val > 70 && val < 130) {
+                        val = random(255-sum);
+                    }
+                } else {
+                    val = random(255-sum);
+                }
+
+                sum += val;
+                cols.push(val);
+            }
+        }
+        
+        this.sphereColMax = cols;
     }
 }
