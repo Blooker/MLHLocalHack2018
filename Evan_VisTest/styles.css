@@ -3,6 +3,24 @@ canvas {
     position: absolute;
 }
 
+button {
+    position: absolute;
+    background-color: #333; /* Green */
+    border: 1px solid #777;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 40px;
+}
+
+button:hover {
+    background-color: #555;
+    border-color: #bbb;
+}
+
+/*
 #controls {
     width: 0px;
 }
@@ -19,6 +37,18 @@ canvas {
 }
 
 #controls #play * {
-    font-size: 50px;
     margin-left: -22.5px;
 }
+
+#controls #play i {
+    font-size: 50px;
+    
+}
+
+#controls #play button{
+    position: relative;
+    
+    width: 50px;
+    height: 50px;
+}
+*/
