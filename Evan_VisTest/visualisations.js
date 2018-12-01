@@ -6,6 +6,8 @@ function Visualisations () {
     this.addVis = function (visualisation) {
         this.vis.push(visualisation);
         
+        visList.option(visualisation.name);
+        
         if(this.selectedVis == null){
             this.selectVis(0);
         }

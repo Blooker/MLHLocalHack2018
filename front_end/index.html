@@ -23,5 +23,58 @@
             <p>This project was created at Local Hack Day London (City University of London). Greetings from: Shuha, Evan, Tristan, Nikos, Eddy, Brandon and Shahan!</p>
         </div>
     </footer>
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://sdk.scdn.co/spotify-player.js"></script>
+<script>
+    const accessToken = ''
+    window.onSpotifyWebPlaybackSDKReady = () => {
+        const token = accessToken;
+        const player = new Spotify.Player({
+            name: 'Web Playback SDK Quick Start Player',
+            getOAuthToken: cb => { cb(token); }
+    });
+
+        // Error handling
+        player.addListener('initialization_error', ({ message }) => { console.error(message); });
+        player.addListener('authentication_error', ({ message }) => { console.error(message); });
+        player.addListener('account_error', ({ message }) => { console.error(message); });
+        player.addListener('playback_error', ({ message }) => { console.error(message); });
+
+        // Playback status updates
+        player.addListener('player_state_changed', state => { console.log(state); });
+
+        // Ready
+        player.addListener('ready', ({ device_id }) => {
+            console.log('Ready with Device ID', device_id);
+    });
+
+        // Not Ready
+        player.addListener('not_ready', ({ device_id }) => {
+            console.log('Device ID has gone offline', device_id);
+    });
+
+        // Connect to the player!
+        player.connect();
+    };
+
+    var ajaxobj = $.ajax(
+    {
+        url: 'https://api.spotify.com/v1/audio-analysis/3JIxjvbbDrA9ztYlNcp3yL',
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
+        dataType: "json",
+       // data: '3JIxjvbbDrA9ztYlNcp3yL'
+    }
+);
+ajaxobj.done(function(data){
+    alert(JSON.stringify(data.bars));
+    console.log(JSON.stringify(data.segments));
+});
+
+
+</script>
 </body>
 </html>

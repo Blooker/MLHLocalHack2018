@@ -8,11 +8,12 @@ var currentScale;
 
 var vol;
 
-var controls;
-var playButton;
+var visList, controls, playButton;
 
 function preload() {
     song = loadSound("audio/audioTest.mp3");
+    
+    visList = select("#visList");
     controls = select("#controls");
     playButton = select("#playButton");
 }
@@ -27,7 +28,8 @@ function setup() {
     toggleAudio();
 
     amp = new p5.Amplitude();
-
+    amp.smooth(0.8);
+    
     ambientLight(50);
 
     updateVisSize();
@@ -42,6 +44,7 @@ function draw() {
     background(0); 
     
     controls.position((windowWidth/2)-25, windowHeight-75);
+    visList.position(20, windowHeight-62);
     playButton.mouseClicked(toggleAudio);
     
     if (visualisations.selectedVis != null) {
