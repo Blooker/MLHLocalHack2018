@@ -1,0 +1,14 @@
+var ajaxplayer = $.ajax(
+            {
+                url: 'https://api.spotify.com/v1/me/player',
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken
+                },
+                dataType: "json",
+            }
+        );
+        ajaxobj.done(function(data){
+            console.log(JSON.stringify(data.is_playing));
+        });
+    });
