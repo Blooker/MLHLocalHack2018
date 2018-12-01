@@ -10,14 +10,7 @@
 </head>
 
 <body>
-    <!--
-        <header>
-            <div id="test">
-                <span class="helper"></span>
-                <img src="Assets/SpotFX_logo.png">
-            </div>
-        </header>
--->
+
     <div id="container">
         <img src="Assets/spotfx_green.png">
         <a target="_blank" href="https://developer.spotify.com/branding-guidelines/"><button>Log in with Spotify</button></a>
@@ -25,22 +18,19 @@
     </div>
 
     <footer>
+        <a target="_blank" href="https://github.com/Blooker/MLHLocalHack2018"><i class="fab fa-github" id="logo-git"></i></a>
         <div>
-            
-            <a target="_blank" href="https://github.com/Blooker/MLHLocalHack2018"><i class="fab fa-github" style="color: #fff; float: right; margin-right: 20px; font-size: 20px;"></i></a>
             <p>This project was created at Local Hack Day London (City University of London). Greetings from: Shuha, Evan, Tristan, Nikos, Eddy, Brandon and Shahan!</p>
         </div>
     </footer>
-    
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://sdk.scdn.co/spotify-player.js"></script>
 <script>
-    const accessToken = 'BQA_4z0hTlre1K5Fk-zbli1erWZsPZi7SuB3bkVJLGsMj0RoKQT2pLK5RhUHSCSHAylJJFEWRCIBEVBAynDszFWvReRCt-Hs5Jgy01oTX3NxC_9xtaQPty6GLpVBAzQleOCs13egkM2BdsgTmYYFxqKsHWGH-rdhfPVwzVMld8Jn058u8D5zOJTbsSo-';
-    
+    const accessToken = 'BQAH8flDxKBe0199vjm9-dOxciCtUI6Bp_S0Bzlq5keQVbwyt3CxjbOz_u_kQ172UPUOq8rbIfUJ0jxiyIMeE8ji_NyRl7g4lYQFFAN4xuxipfovdPU8sHvIIMfv75Zw0jhdys9CiC5gjxFp1nzBjbWlR-J7B-U4ZawFcn9PmhdW1qVJxaFIXv-MuWB2';
     window.onSpotifyWebPlaybackSDKReady = () => {
         const token = accessToken;
         const player = new Spotify.Player({
-            name: 'Web Playback SDK Quick Start Player',
+            name: 'Web Playback Player',
             getOAuthToken: cb => { cb(token); }
     });
 
@@ -51,7 +41,31 @@
         player.addListener('playback_error', ({ message }) => { console.error(message); });
 
         // Playback status updates
-        player.addListener('player_state_changed', state => { console.log(state); });
+        // player.addListener('player_state_changed', state => { console.log(state); });
+
+
+        player.addListener('player_state_changed', ({
+            position,
+            duration,
+            track_window: { current_track }
+        }) => {
+            console.log('Currently Playing', current_track);
+        console.log('Position in Song', position);
+        console.log('Duration of Song', duration);
+        var ajaxobj = $.ajax(
+            {
+                url: 'https://api.spotify.com/v1/audio-analysis/' + current_track.id,
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken
+                },
+                dataType: "json",
+            }
+        );
+        ajaxobj.done(function(data){
+            console.log(JSON.stringify(data.segments));
+        });
+    });
 
         // Ready
         player.addListener('ready', ({ device_id }) => {
@@ -66,24 +80,5 @@
         // Connect to the player!
         player.connect();
     };
-
-    var ajaxobj = $.ajax(
-    {
-        url: 'https://api.spotify.com/v1/audio-analysis/3JIxjvbbDrA9ztYlNcp3yL',
-        method: 'GET',
-        headers: {
-            'Authorization': 'Bearer ' + accessToken
-        },
-        dataType: "json",
-       // data: '3JIxjvbbDrA9ztYlNcp3yL'
-    }
-);
-ajaxobj.done(function(data){
-    alert(JSON.stringify(data.bars));
-    console.log(JSON.stringify(data.segments));
-});
-
-
-</script>
 </body>
 </html>
