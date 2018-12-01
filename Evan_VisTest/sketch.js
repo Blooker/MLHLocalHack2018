@@ -1,3 +1,5 @@
+var visualisations = null;
+
 var song;
 
 var preloadDone = false;
@@ -29,25 +31,22 @@ function setup() {
     ambientLight(50);
 
     updateVisSize();
+    
+    visualisations = new Visualisations();
+    visualisations.addVis(new SphereGrow());
+    
+    visualisations.setupVis();
 }
 
 function draw() {    
     background(0); 
-    var dirY = (mouseY / height - 0.5) *2;
-    var dirX = (mouseX / width - 0.5) *2;
-    directionalLight(250, 250, 250, -dirX, -dirY, -0.25);
-
-    vol = amp.getLevel();
-
-    noStroke();
-
-    scale(currentScale);
-    ambientMaterial(250);
-    sphere(vol*800);
-    scale(1/currentScale);
-
+    
     controls.position((windowWidth/2)-25, windowHeight-75);
     playButton.mouseClicked(toggleAudio);
+    
+    if (visualisations.selectedVis != null) {
+        visualisations.selectedVis.draw(amp);
+    }
 }
 
 function windowResized() {
