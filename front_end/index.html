@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SpotFX</title>
@@ -14,7 +15,19 @@
     <div id="container">
         <img src="Assets/spotfx_green.png">
         <a target="_blank" href="https://developer.spotify.com/branding-guidelines/"><button>Log in with Spotify</button></a>
-        <p>You will be redirected to Spotify.com</p>
+        <p>Powered by SpotFX</p>
+    </div>
+    
+    <div id="logo-container">
+        <a href="https://www.algolia.com/"><img class ="logo" src="Assets/Logos/algolia_sq.png"></a>
+        <a href="https://www.capitalone.com/"><img class ="logo" src="Assets/Logos/Capital_One_sq.png"></a>
+        <a href="https://www.clarifai.com/"><img class ="logo" src="Assets/Logos/clarifai_sq.png"></a>
+        <a href="https://www.domain.com/"><img class ="logo" src="Assets/Logos/domaincom.png"></a>
+        <a href="https://www.microsoft.com/en-us/"><img class ="logo" src="Assets/Logos/Microsoft.png"></a>
+        <a href="https://mlh.io/"><img class ="logo" src="Assets/Logos/MLH.png"></a>
+        <a href="https://github.com/"><img class ="logo" src="Assets/Logos/Octocat.png"></a>
+        <a href="https://www.stickermule.com/"><img class ="logo" src="Assets/Logos/sticker-mule-logo-png-transparent.png"></a>
+        <a href="https://www.twilio.com/"><img class ="logo" src="Assets/Logos/tiwilio.png"></a>
     </div>
 
     <footer>
@@ -24,61 +37,83 @@
         </div>
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://sdk.scdn.co/spotify-player.js"></script>
-<script>
-    const accessToken = 'BQAH8flDxKBe0199vjm9-dOxciCtUI6Bp_S0Bzlq5keQVbwyt3CxjbOz_u_kQ172UPUOq8rbIfUJ0jxiyIMeE8ji_NyRl7g4lYQFFAN4xuxipfovdPU8sHvIIMfv75Zw0jhdys9CiC5gjxFp1nzBjbWlR-J7B-U4ZawFcn9PmhdW1qVJxaFIXv-MuWB2';
-    window.onSpotifyWebPlaybackSDKReady = () => {
-        const token = accessToken;
-        const player = new Spotify.Player({
-            name: 'Web Playback Player',
-            getOAuthToken: cb => { cb(token); }
-    });
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <script>
+        const accessToken = 'BQAH8flDxKBe0199vjm9-dOxciCtUI6Bp_S0Bzlq5keQVbwyt3CxjbOz_u_kQ172UPUOq8rbIfUJ0jxiyIMeE8ji_NyRl7g4lYQFFAN4xuxipfovdPU8sHvIIMfv75Zw0jhdys9CiC5gjxFp1nzBjbWlR-J7B-U4ZawFcn9PmhdW1qVJxaFIXv-MuWB2';
+        window.onSpotifyWebPlaybackSDKReady = () => {
+            const token = accessToken;
+            const player = new Spotify.Player({
+                name: 'Web Playback Player',
+                getOAuthToken: cb => {
+                    cb(token);
+                }
+            });
 
-        // Error handling
-        player.addListener('initialization_error', ({ message }) => { console.error(message); });
-        player.addListener('authentication_error', ({ message }) => { console.error(message); });
-        player.addListener('account_error', ({ message }) => { console.error(message); });
-        player.addListener('playback_error', ({ message }) => { console.error(message); });
+            // Error handling
+            player.addListener('initialization_error', ({
+                message
+            }) => {
+                console.error(message);
+            });
+            player.addListener('authentication_error', ({
+                message
+            }) => {
+                console.error(message);
+            });
+            player.addListener('account_error', ({
+                message
+            }) => {
+                console.error(message);
+            });
+            player.addListener('playback_error', ({
+                message
+            }) => {
+                console.error(message);
+            });
 
-        // Playback status updates
-        // player.addListener('player_state_changed', state => { console.log(state); });
+            // Playback status updates
+            // player.addListener('player_state_changed', state => { console.log(state); });
 
 
-        player.addListener('player_state_changed', ({
-            position,
-            duration,
-            track_window: { current_track }
-        }) => {
-            console.log('Currently Playing', current_track);
-        console.log('Position in Song', position);
-        console.log('Duration of Song', duration);
-        var ajaxobj = $.ajax(
-            {
-                url: 'https://api.spotify.com/v1/audio-analysis/' + current_track.id,
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + accessToken
-                },
-                dataType: "json",
-            }
-        );
-        ajaxobj.done(function(data){
-            console.log(JSON.stringify(data.segments));
-        });
-    });
+            player.addListener('player_state_changed', ({
+                position,
+                duration,
+                track_window: {
+                    current_track
+                }
+            }) => {
+                console.log('Currently Playing', current_track);
+                console.log('Position in Song', position);
+                console.log('Duration of Song', duration);
+                var ajaxobj = $.ajax({
+                    url: 'https://api.spotify.com/v1/audio-analysis/' + current_track.id,
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + accessToken
+                    },
+                    dataType: "json",
+                });
+                ajaxobj.done(function(data) {
+                    console.log(JSON.stringify(data.segments));
+                });
+            });
 
-        // Ready
-        player.addListener('ready', ({ device_id }) => {
-            console.log('Ready with Device ID', device_id);
-    });
+            // Ready
+            player.addListener('ready', ({
+                device_id
+            }) => {
+                console.log('Ready with Device ID', device_id);
+            });
 
-        // Not Ready
-        player.addListener('not_ready', ({ device_id }) => {
-            console.log('Device ID has gone offline', device_id);
-    });
+            // Not Ready
+            player.addListener('not_ready', ({
+                device_id
+            }) => {
+                console.log('Device ID has gone offline', device_id);
+            });
 
-        // Connect to the player!
-        player.connect();
-    };
-</body>
-</html>
+            // Connect to the player!
+            player.connect();
+        }; <
+        /body> <
+        /html>
