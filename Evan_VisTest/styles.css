@@ -1,0 +1,24 @@
+canvas {
+    z-index: -1;
+    position: absolute;
+}
+
+#controls {
+    width: 0px;
+}
+
+#controls * {
+    position: absolute;
+    bottom: 0;
+    padding: 0 0 20px 0;
+}
+
+#controls #play {
+    width: 100vw;
+    margin-left: 50vw;
+}
+
+#controls #play * {
+    font-size: 50px;
+    margin-left: -22.5px;
+}

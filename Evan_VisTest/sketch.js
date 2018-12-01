@@ -1,12 +1,19 @@
-var mic;
 var song;
 
 var currentScale;
 
+var vol;
+
+function preload() {
+    song = loadSound("audio/audioTest.mp3");
+}
+
 function setup() {
     createCanvas(windowWidth, windowHeight);
-    mic = new p5.AudioIn();
-    mic.start();
+    frameRate(60);
+    
+    song.play();
+    amp = new p5.Amplitude();
     
     updateVisSize();
 }
@@ -18,8 +25,15 @@ function draw() {
     
     scale(currentScale);
     
-    var vol = mic.getLevel();
+    vol = amp.getLevel();
+    
     ellipse(0, 0, 800, vol*1600);
+}
+
+function keyPressed() {
+    if (keyCode === 32) {
+        toggleAudio();
+    }
 }
 
 function windowResized() {
@@ -29,4 +43,12 @@ function windowResized() {
 
 function updateVisSize () {
     currentScale = (windowWidth/1920);
+}
+
+function toggleAudio () {
+    if (song.isPlaying()) {
+        song.pause();
+    } else {
+        song.play();
+    }
 }
