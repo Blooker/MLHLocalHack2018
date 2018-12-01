@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {
+    background-color: #191414;
+    margin: 0px;
+    text-align: center;
+}
+
+#parent {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 250px;
+  height: 100px;
+/*  background-color: #ccc;*/
+/*  border-radius: 3px;*/
+}
+
+#parent button {
+    background-color: #1DB954;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 25px;
+    border-radius: 3px;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+#parent p {
+    color: #ccc;
+    font-size: 13px;
+    font-family: Roboto;
+    
+}
+
+footer {
+    height: 20px;
+    position: absolute;
+    bottom: 20px;
+    width: 100vw;
+}
+
+footer p {
+    margin-right: 50px;
+    float: right;
+    color: #ccc;
+    font-size: 13px;
+    font-family: Roboto;
+}
+footer a {
+    margin-bottom: 5px;
+}
+
+
+
+
+/*
+#login-container {
+    background-color: #1DB954;
+    width: 300px;
+    height: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    margin: 45vh 0 0 -9vw;
+}
+*/
