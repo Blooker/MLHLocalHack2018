@@ -6,6 +6,11 @@ body {
     text-align: center;
 }
 
+.logo {
+    width: 200px;
+    height: auto;
+}
+
 #container {
   position: absolute;
   margin: auto;
