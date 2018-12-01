@@ -1,15 +1,18 @@
 <!DOCTYPE html>
+
 <html>
 <head>
-    <title>Spotify Web Playback SDK Quick Start Tutorial</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpotFX</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<h2>Open your console log: <code>View > Developer > JavaScript Console</code></h2>
-
-<script src="https://sdk.scdn.co/spotify-player.js"></script>
 <script>
     window.onSpotifyWebPlaybackSDKReady = () => {
-        const token = 'BQD0bVwEDW46Gm_9qxzMcI-kCk_iF2O-DXh1K4r_QkslWlEXqM6nqMGjehyJ8VYesxraXfeJdSJZnWaRCKpRXEI7F-7qCPV1XcuHBMsG0eplO68IOM1s6rPeCTlGEtDKa4kjz0iod5WV1jGIe3ieqBZWv67sgYg2M7tpsOOqxgczZTx-gQ87V9pM9yD5';
+        const token = 'BQBhi-8hK-BFR5dXhu8sJ6hd59_2OjiuQk39CeoawgObi6Iw2C2WMAVQSRsfDYLKPZODwsRztsoui5aPmv8L8O95j8Q1Z75GXBwhj6Kpcgt-fgbsoHDmFx_52FzIKITNDDBimrIE8WYRSPlTNnSXC3dCsszcHPw8o-oXGlW11Y4PnuHvXRNkiOVUyJjD
+Message Input
+Private Channel groupaudiovisual';
         const player = new Spotify.Player({
             name: 'Web Playback SDK Quick Start Player',
             getOAuthToken: cb => { cb(token); }
@@ -38,5 +41,15 @@
         player.connect();
     };
 </script>
+<div id="parent">
+    <button><a target="_blank" href="https://developer.spotify.com/branding-guidelines/">Log in to Spotify</a></button>
+    <p>You will be redirected to Spotify.com</p>
+</div>
+
+<footer>
+    <a target="_blank" href="https://github.com/Blooker/MLHLocalHack2018"><p>Github</p></a>
+    <p>Greetings from: Shuha, Evan, Tristan, Nikos, Eddy, Brandon and Shahan!</p>
+    <p>This project was created at Local Hack Day London (City University of London)</p>
+</footer>
 </body>
 </html>
