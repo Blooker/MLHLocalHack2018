@@ -11,7 +11,7 @@ var vol;
 var visList, controls, playButton;
 
 function preload() {
-    song = loadSound("audio/audioTest.mp3");
+    song = loadSound("audio/audioTest*.mp3");
     
     visList = select("#visList");
     controls = select("#controls");
